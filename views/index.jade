@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  if (user)
+    p You are currently logged in as: 
+      a(href='/profile/#{user._id}') #{user.username}
+    if (user.foursquare_code)
+      p You have authenticated with foursquare! 
+        a(href='https://foursquare.com/oauth2/authenticate?client_id=BK1E4ASTTXUOCAFPL1EY3HUKEKVET5EVKSEN5RIVRU502JG2&response_type=code&redirect_uri=#{REDIRECT_URI}') Change
+    else
+      a(href='https://foursquare.com/oauth2/authenticate?client_id=BK1E4ASTTXUOCAFPL1EY3HUKEKVET5EVKSEN5RIVRU502JG2&response_type=code&redirect_uri=#{REDIRECT_URI}') Authorize Foursquare
+
+  else
+    p You are currently not logged in. Please login or register...
+  h2 All Users
+  ul
+    each u in users
+      li
+        a(href='/profile/#{u._id}') #{u.username}

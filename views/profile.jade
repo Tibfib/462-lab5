@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  if (profile)
+    p Here is user: #{profile.username}
+  if (checkin)
+    div
+      h2 Latest Checkin
+      blockquote "#{checkin.shout}" <br/> #{moment(checkin.createdAt * 1000).format('LLL')}
+      if (!checkin.partial)
+        div Location: #{checkin.venue.name}
+        div Is Mayor: #{checkin.isMayor}
+  else
+    p Either this user hasn't authorized their account with foursquare or they haven't had any checkins...
